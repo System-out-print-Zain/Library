@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container modal-non-active">
         <div class="header">
             <h1>E-Library</h1>
         </div>
@@ -16,21 +16,21 @@
         </div>
         <div class="book-dash">
             <div class="book">
-                <button class="remove">X</button>
+                <button class="x-btn remove">X</button>
                 <h2 class="title">Example Bookadddddddddddddd</h2>
                 <h3 class="author">By: Blah Blah</h3>
                 <h3 class="pages">Pages: 100</h3>
                 <button class="read">Read</button>
             </div>
             <div class="book">
-                <button class="remove">X</button>
+                <button class="x-btn remove">X</button>
                 <h2 class="title">Example Book</h2>
                 <h3 class="author">By: Blah Blah</h3>
                 <h3 class="pages">Pages: 100</h3>
                 <button class="read">Read</button>
             </div>
             <div class="book">
-                <button class="remove">X</button>
+                <button class="x-btn remove">X</button>
                 <h2 class="title">Example Book</h2>
                 <h3 class="author">By: Blah Blah</h3>
                 <h3 class="pages">Pages: 100</h3>
@@ -41,5 +41,25 @@
             <h4 class="github">System-out-print-Zain</h4>
         </div>
     </div>
+    <form class="modal non-active">
+        <button class="x-btn cancel-modal">X</button>
+        <div class="input">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Book Title" required>
+        </div>
+        <div class="input">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" placeholder="Author Name" required>
+        </div>
+        <div class="input">
+            <label for="pages">Number of Pages:</label>
+            <input type="number" id="pages" name="pages" placeholder="Pages" required>
+        </div>
+        <div class="input">
+            <label for="read">Read:</label>
+            <input type="checkbox" id="read" name="read" placeholder="Yes/No" required>
+        </div>
+        <input class="submit" type="submit" value="Submit">
+    </form>
 </body>
 </html>
