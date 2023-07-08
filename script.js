@@ -1,8 +1,9 @@
 "use strict";
 
 // DOM objects
-const dash = document.getElementsByClassName("book-dash")[0];
+const dash = document.querySelector(".book-dash");
 
+const closeFormBtn = document.querySelector(".cancel-modal");
 const bookForm = document.querySelector("form");
 const formActive = "active"
 const formNonActive = "non-active"
@@ -29,6 +30,12 @@ bookForm.addEventListener("submit", (e) => {
     let bookObj = new Book(title.value, author.value, pages.value, readVal);
     addBookToLibrary(bookObj);
 
+    // Refresh fields
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read.checked = false;
+
     // Close form
     bookForm.classList.remove(formActive);
     bookForm.classList.add(formNonActive);
@@ -37,6 +44,21 @@ bookForm.addEventListener("submit", (e) => {
     container.classList.add(containerNonActive);
 
 })
+
+closeFormBtn.addEventListener("click", () => {
+    // Refresh fields
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    read.checked = false;
+    
+    // Close form
+    bookForm.classList.remove(formActive);
+    bookForm.classList.add(formNonActive);
+
+    container.classList.remove(containerActive);
+    container.classList.add(containerNonActive);
+});
 
 addBookBtn.addEventListener("click", () => {
     // Open form
@@ -52,6 +74,9 @@ addBookBtn.addEventListener("click", () => {
 // Stores all books in the library
 const library = [];
 
+// Example book
+addBookToLibrary(new Book("The Lightning Thief", "Rick Riordan", "396", true));
+
 // Constructor for Book objects
 function Book(title, author, pages, read) {
     this.title = title;
@@ -62,7 +87,7 @@ function Book(title, author, pages, read) {
 
 Book.prototype.toggleRead = function() {
     if (this.read) this.read = false;
-        else this.read = true; 
+    else this.read = true; 
 }
 
 
@@ -92,7 +117,10 @@ function addBookToPage(book){
     pageNum.textContent = book.pages;
     xBtn.textContent = "X";
     if (book.read) readBtn.textContent = "Read";
-    else readBtn.textContent = "Not Read";
+    else {
+        readBtn.textContent = "Not Read"
+        readBtn.style.backgroundColor = "red";
+    };
 
     bookEle.appendChild(xBtn);
     bookEle.appendChild(title);
@@ -107,15 +135,15 @@ function addBookToPage(book){
     })
 
     readBtn.addEventListener("click", () => {
-        book.toggleRead();
         if (book.read){
-            readBtn.style.backgroundColor = rgb(1, 95, 1);
+            readBtn.style.backgroundColor = "red";
             readBtn.textContent = "Not Read";
         }
         else {
-            readBtn.style.backgroundColor = red;
-            readBtn.textContent = "Not Read";
+            readBtn.style.backgroundColor = "rgb(1, 95, 1)";
+            readBtn.textContent = "Read";
         }
+        book.toggleRead();
     })
 
     dash.appendChild(bookEle);  
