@@ -15,7 +15,6 @@ const containerActive = "modal-active";
 const containerNonActive = "modal-non-active";
 
 bookForm.addEventListener("submit", (e) => {
-    console.log("Yes")
     e.preventDefault();
 
     let title = document.getElementById("title");
@@ -26,6 +25,11 @@ bookForm.addEventListener("submit", (e) => {
     let readVal;
     if (read.checked) readVal = true;
     else readVal = false;
+
+    if (titleExists(title.value)) {
+        alert("A book by this title is already in your library."); 
+        return;
+    }
 
     let bookObj = new Book(title.value, author.value, pages.value, readVal);
     addBookToLibrary(bookObj);
@@ -62,7 +66,6 @@ closeFormBtn.addEventListener("click", () => {
 
 addBookBtn.addEventListener("click", () => {
     // Open form
-    console.log("yes");
     bookForm.classList.add(formActive);
     bookForm.classList.remove(formNonActive);
 
@@ -166,4 +169,15 @@ function removeBookFromLib(title){
             shiftBooksForward(i);
         }
     }
+}
+
+function titleExists(title){
+    for (let i = 0; i < library.length; i++)
+    {
+        if (library[i].title == title)
+        {
+            return true;
+        }
+    }
+    return false;
 }
